@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="電気に関する知識を試せる10問クイズ！ビリビリくるか、余裕でクリアか？電閃－DENSEN－presents" />
+  <meta property="og:title" content="ビリビリ⚡クイズ｜電閃－DENSEN－" />
+  <meta property="og:description" content="電気の基礎知識クイズ10問に挑戦！あなたは何問正解できる？" />
+  <meta property="og:type" content="website" />
+  <title>ビリビリ⚡クイズ｜電閃－DENSEN－</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --surface2: #1a2236;
+      --accent: #f5c800;
+      --accent2: #00c8ff;
+      --correct: #22c55e;
+      --wrong: #ef4444;
+      --text: #f0f4ff;
+      --text-muted: #8b9aba;
+      --radius: 16px;
+      --shadow: 0 4px 32px rgba(0,200,255,0.10);
+    }
+    html { height: 100%; }
+    body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 16px 12px 40px;
+    }
+
+    /* ===== Header ===== */
+    .header {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      padding: 24px 0 8px;
+    }
+    .header .brand {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent2);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .header h1 {
+      font-size: clamp(26px, 7vw, 36px);
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      background: linear-gradient(90deg, var(--accent) 0%, #ffec80 50%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header .subtitle {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .lightning-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      margin: 12px auto;
+    }
+
+    /* ===== Progress ===== */
+    .progress-wrap {
+      width: 100%;
+      max-width: 520px;
+      margin: 16px 0 8px;
+    }
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: var(--surface2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* ===== Card ===== */
+    .card {
+      width: 100%;
+      max-width: 520px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid #1e2d4a;
+      box-shadow: var(--shadow);
+      padding: 28px 24px 24px;
+      margin-top: 8px;
+    }
+    .question-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+    .question-text {
+      font-size: clamp(16px, 4.5vw, 20px);
+      font-weight: 700;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      min-height: 60px;
+    }
+
+    /* ===== Choices ===== */
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .choice-btn {
+      background: var(--surface2);
+      border: 2px solid #1e2d4a;
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      line-height: 1.4;
+    }
+    .choice-btn:hover:not(:disabled) {
+      border-color: var(--accent2);
+      background: #1a2d44;
+      transform: translateY(-1px);
+    }
+    .choice-btn:active:not(:disabled) { transform: scale(0.98); }
+    .choice-btn.correct {
+      border-color: var(--correct);
+      background: rgba(34,197,94,0.12);
+      color: var(--correct);
+    }
+    .choice-btn.wrong {
+      border-color: var(--wrong);
+      background: rgba(239,68,68,0.10);
+      color: var(--wrong);
+    }
+    .choice-btn:disabled { cursor: default; }
+
+    /* ===== Feedback ===== */
+    .feedback {
+      margin-top: 16px;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 14px;
+      line-height: 1.6;
+      display: none;
+    }
+    .feedback.show { display: block; }
+    .feedback.correct-fb {
+      background: rgba(34,197,94,0.10);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: #86efac;
+    }
+    .feedback.wrong-fb {
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.25);
+      color: #fca5a5;
+    }
+    .feedback .fb-title {
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    /* ===== Next Button ===== */
+    .next-btn {
+      display: none;
+      width: 100%;
+      margin-top: 16px;
+      padding: 15px;
+      background: linear-gradient(90deg, var(--accent) 0%, #ffdd00 100%);
+      color: #0a0e1a;
+      font-size: 16px;
+      font-weight: 900;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .next-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .next-btn:active { transform: scale(0.98); }
+    .next-btn.show { display: block; }
+
+    /* ===== Result Screen ===== */
+    .result-screen {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      display: none;
+    }
+    .result-screen.show { display: block; }
+    .result-card {
+      background: var(--surface);
+      border: 1px solid #1e2d4a;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px 24px 28px;
+    }
+    .result-emoji { font-size: 56px; margin-bottom: 12px; }
+    .result-rank {
+      font-size: clamp(20px, 6vw, 26px);
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+    .result-score {
+      font-size: clamp(48px, 14vw, 64px);
+      font-weight: 900;
+      line-height: 1;
+      margin: 8px 0;
+    }
+    .result-score span { font-size: 0.4em; color: var(--text-muted); vertical-align: middle; }
+    .result-msg {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 12px 0 24px;
+    }
+    .result-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .share-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px;
+      background: #000;
+      border: 2px solid #333;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .share-btn:hover { border-color: #555; background: #111; }
+    .share-btn svg { flex-shrink: 0; }
+    .retry-btn {
+      padding: 15px;
+      background: var(--surface2);
+      border: 2px solid #1e2d4a;
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .retry-btn:hover { border-color: var(--accent2); }
+
+    /* ===== Review Section ===== */
+    .review-section {
+      width: 100%;
+      max-width: 520px;
+      margin-top: 20px;
+      display: none;
+    }
+    .review-section.show { display: block; }
+    .review-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .review-item {
+      background: var(--surface);
+      border: 1px solid #1e2d4a;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .review-item .r-q { font-weight: 700; color: var(--text); margin-bottom: 5px; line-height: 1.5; }
+    .review-item .r-a { color: var(--text-muted); }
+    .review-item .r-a .lbl { font-weight: 700; margin-right: 4px; }
+    .review-item .r-a .correct-a { color: var(--correct); }
+    .review-item .r-a .your-a { }
+    .review-item.got-it { border-color: rgba(34,197,94,0.25); }
+    .review-item.got-wrong { border-color: rgba(239,68,68,0.25); }
+    .r-status { float: right; font-size: 16px; }
+
+    /* ===== Start Screen ===== */
+    .start-screen {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+    }
+    .start-card {
+      background: var(--surface);
+      border: 1px solid #1e2d4a;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px 24px;
+      margin-top: 8px;
+    }
+    .start-icon { font-size: 64px; margin-bottom: 12px; display: block; }
+    .start-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .start-btn {
+      display: block;
+      width: 100%;
+      padding: 17px;
+      background: linear-gradient(90deg, var(--accent) 0%, #ffdd00 100%);
+      color: #0a0e1a;
+      font-size: 18px;
+      font-weight: 900;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .start-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ===== Flash Animation ===== */
+    @keyframes flash-correct {
+      0%,100% { box-shadow: none; }
+      50% { box-shadow: 0 0 30px rgba(34,197,94,0.4); }
+    }
+    @keyframes flash-wrong {
+      0%,100% { box-shadow: none; }
+      50% { box-shadow: 0 0 30px rgba(239,68,68,0.35); }
+    }
+    .card.flash-correct { animation: flash-correct 0.5s ease; }
+    .card.flash-wrong { animation: flash-wrong 0.5s ease; }
+
+    /* ===== Footer ===== */
+    .footer {
+      margin-top: 32px;
+      font-size: 11px;
+      color: #3d4f6e;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">電閃 — DENSEN — presents</div>
+    <h1>ビリビリ⚡クイズ</h1>
+    <div class="subtitle">電気の常識、あなたは何問わかる？</div>
+    <div class="lightning-line"></div>
+  </header>
+
+  <!-- Start Screen -->
+  <div class="start-screen" id="startScreen">
+    <div class="start-card">
+      <span class="start-icon">⚡</span>
+      <p class="start-desc">
+        電気の基礎知識クイズ10問に挑戦！<br>
+        初心者でも楽しめる問題ばかり。<br>
+        正解の解説で「なるほど！」を体験せよ。
+      </p>
+      <button class="start-btn" onclick="startQuiz()">クイズスタート ⚡</button>
+    </div>
+  </div>
+
+  <!-- Quiz Section -->
+  <div id="quizSection" style="width:100%;max-width:520px;display:none;">
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span id="qCounter">問題 1 / 10</span>
+        <span id="scoreCounter">正解 0 問</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar" id="progressBar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="card" id="quizCard">
+      <div class="question-num" id="questionNum">Q1</div>
+      <div class="question-text" id="questionText"></div>
+      <div class="choices" id="choicesContainer"></div>
+      <div class="feedback" id="feedback">
+        <div class="fb-title" id="fbTitle"></div>
+        <div id="fbBody"></div>
+      </div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">次の問題へ →</button>
+    </div>
+  </div>
+
+  <!-- Result Screen -->
+  <div class="result-screen" id="resultScreen">
+    <div class="result-card">
+      <div class="result-emoji" id="resultEmoji"></div>
+      <div class="result-rank" id="resultRank"></div>
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-actions">
+        <a class="share-btn" id="shareBtn" href="#" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.73-8.835L1.254 2.25H8.08l4.26 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          Xでシェアする
+        </a>
+        <button class="retry-btn" onclick="restartQuiz()">もう一度挑戦する 🔄</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Section -->
+  <div class="review-section" id="reviewSection">
+    <div class="review-title">— 解答まとめ —</div>
+    <div id="reviewList"></div>
+  </div>
+
+  <footer class="footer">
+    電閃－DENSEN－ v0.1 beta &nbsp;｜&nbsp; © 2026 Antares Eight
+  </footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "日本の一般家庭のコンセントに来ている電圧は何ボルト？",
+    choices: ["50V", "100V", "200V", "220V"],
+    answer: 1,
+    explanation: "日本の家庭用コンセントは交流100Vです。アメリカは120V、ヨーロッパは220〜240Vが標準で、日本の100Vは世界的に見ても低い方です。感電時のリスクも変わるため、海外製電化製品を使う際は変圧器が必要になることがあります。"
+  },
+  {
+    q: "住宅の配線でよく使われる電線の被覆の色。「黒」は通常どちらの電線？",
+    choices: ["接地側（電柱からの帰り線）", "非接地側（電柱からの来る線）", "アース線（大地へつなぐ線）", "どれでもない"],
+    answer: 1,
+    explanation: "黒は非接地側（L：電気が来る側）、白は接地側（N：電柱の中性点につながる側）です。どちらも触ると危険ですが、非接地側（黒）は特に注意が必要です。電線の色分けは安全作業の基本中の基本！"
+  },
+  {
+    q: "「第二種電気工事士」の免状で工事できる範囲はどれ？",
+    choices: [
+      "全ての電気設備（高圧・低圧どちらも）",
+      "一般用電気工作物（住宅・小規模店舗など）のみ",
+      "工場・ビルなど大きな建物のみ",
+      "高圧設備（6600V以上）のみ"
+    ],
+    answer: 1,
+    explanation: "第二種電気工事士は「一般用電気工作物」、つまり住宅や小規模店舗など600V以下の工事ができます。工場・ビルなど（自家用電気工作物）には第一種が必要です。無資格工事は電気工事士法違反になります。"
+  },
+  {
+    q: "家の分電盤にある「漏電遮断器（漏電ブレーカー）」が作動するのはどんなとき？",
+    choices: [
+      "電気の使いすぎ（過電流）を検知したとき",
+      "電気が外に漏れ出した（地絡・漏電）を検知したとき",
+      "雷が近くに落ちたとき",
+      "電圧が高くなりすぎたとき"
+    ],
+    answer: 1,
+    explanation: "漏電遮断器（ELCB）は「地絡電流＝電気が本来の経路以外に漏れ出す」状態を検知して回路を遮断します。感電事故や漏電火災を防ぐ命綱です。通常は電流差が15〜30mAを超えると0.1秒以内に遮断します。"
+  },
+  {
+    q: "電気抵抗の単位はどれ？",
+    choices: ["A（アンペア）：電流の単位", "V（ボルト）：電圧の単位", "W（ワット）：電力の単位", "Ω（オーム）：抵抗の単位"],
+    answer: 3,
+    explanation: "電気抵抗の単位はΩ（オーム）です。「V＝I×R（電圧＝電流×抵抗）」というオームの法則は電気の超基本！たとえば100Vのコンセントに10Ωの抵抗をつなぐと10Aの電流が流れます。"
+  },
+  {
+    q: "「過電流」とはどういう状態のこと？",
+    choices: [
+      "電圧が急に高くなった状態",
+      "電線や機器の許容量を超えた電流が流れている状態",
+      "電気が逆方向に流れている状態",
+      "電気が全く流れていない状態"
+    ],
+    answer: 1,
+    explanation: "過電流とは、電線や機器が安全に流せる限界（許容電流）を超えた電流が流れている状態です。放置すると電線が発熱し、最悪の場合は火災に。分電盤のブレーカーは過電流を検知して自動的に遮断する装置です。"
+  },
+  {
+    q: "家のコンセントをよく見ると2つの穴に長さの違いがある。長い方の穴はどちら側？",
+    choices: [
+      "非接地側（電気が来る側）",
+      "接地側（電柱の中性点につながる側）",
+      "日本では規格がなくランダム",
+      "アース（接地極）"
+    ],
+    answer: 1,
+    explanation: "JIS C 8303（配線用差込接続器）の規格で、長い穴（約9mm）が接地側（N）、短い穴（約6mm）が非接地側（L）と定められています。冷蔵庫などプラグに向きがある機器は、正しい向きで差すことで安全性が高まります。"
+  },
+  {
+    q: "「タコ足配線」が危険な主な理由はどれ？",
+    choices: [
+      "コードが絡まって足を引っ掛けやすくなるから",
+      "コンセントや延長コードの許容電流を超え、発熱・火災の原因になるから",
+      "電気代が何倍にも跳ね上がるから",
+      "電圧が不安定になり電化製品が壊れやすくなるから"
+    ],
+    answer: 1,
+    explanation: "家庭用コンセント・延長コードの許容電流は一般的に15A（1500W）。タコ足配線で合計消費電力がこれを超えると電線が過熱し、最悪火災になります。エアコン・電子レンジ・ドライヤーなど大電力機器は別々のコンセントから取りましょう。"
+  },
+  {
+    q: "次のうち「電気工事士の資格がなくてもできる作業」はどれ？",
+    choices: [
+      "壁のコンセントの交換",
+      "天井照明器具の新規取り付け（配線工事あり）",
+      "電球・LEDランプの取り替え",
+      "分電盤（ブレーカーボックス）の交換"
+    ],
+    answer: 2,
+    explanation: "電球・LEDランプの取り替えは電気工作物への工事に該当しないため、電気工事士法の適用外で誰でもできます。一方、コンセント交換・照明の配線工事・分電盤交換は「電気工事」であり、電気工事士法に基づき有資格者が行う必要があります。無資格工事は違法です。"
+  },
+  {
+    q: "洗濯機や電子レンジについている「アース線（緑または緑/黄の線）」の主な目的は？",
+    choices: [
+      "消費電力を減らすため",
+      "電気代を安くするため",
+      "機器が漏電したとき、人体への感電を防ぎ安全に電気を大地へ逃がすため",
+      "電波の受信状態をよくするため"
+    ],
+    answer: 2,
+    explanation: "アース（接地）の目的は、万が一機器が漏電したときに電気を大地へ安全に逃がし、人が触れても感電しないようにすることです。水回り（洗濯機・電子レンジ・エアコンなど）では特にアース接続が重要で、緑色（または緑/黄）の専用線をアース端子に接続します。"
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+function startQuiz() {
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('quizSection').style.display = 'block';
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const q = QUESTIONS[current];
+  answered = false;
+
+  document.getElementById('questionNum').textContent = `Q${current + 1}`;
+  document.getElementById('questionText').textContent = q.q;
+  document.getElementById('qCounter').textContent = `問題 ${current + 1} / 10`;
+  document.getElementById('scoreCounter').textContent = `正解 ${score} 問`;
+  document.getElementById('progressBar').style.width = `${(current / 10) * 100}%`;
+
+  const feedback = document.getElementById('feedback');
+  feedback.className = 'feedback';
+  document.getElementById('nextBtn').className = 'next-btn';
+  document.getElementById('quizCard').className = 'card';
+
+  const container = document.getElementById('choicesContainer');
+  container.innerHTML = '';
+  q.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = c;
+    btn.onclick = () => selectAnswer(i);
+    container.appendChild(btn);
+  });
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = QUESTIONS[current];
+  const buttons = document.querySelectorAll('.choice-btn');
+  const card = document.getElementById('quizCard');
+  const feedback = document.getElementById('feedback');
+  const isCorrect = idx === q.answer;
+
+  userAnswers.push({ q: q.q, chosen: q.choices[idx], correct: q.choices[q.answer], ok: isCorrect });
+
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.answer) b.classList.add('correct');
+    else if (i === idx) b.classList.add('wrong');
+  });
+
+  if (isCorrect) {
+    score++;
+    card.classList.add('flash-correct');
+    feedback.className = 'feedback correct-fb show';
+    document.getElementById('fbTitle').textContent = '⚡ 正解！';
+    document.getElementById('fbBody').textContent = q.explanation;
+  } else {
+    card.classList.add('flash-wrong');
+    feedback.className = 'feedback wrong-fb show';
+    document.getElementById('fbTitle').textContent = '💥 不正解…';
+    document.getElementById('fbBody').textContent = '正解：「' + q.choices[q.answer] + '」\n' + q.explanation;
+  }
+
+  document.getElementById('nextBtn').className = 'next-btn show';
+  document.getElementById('nextBtn').textContent = current < 9 ? '次の問題へ →' : '結果を見る ⚡';
+}
+
+function nextQuestion() {
+  current++;
+  if (current < QUESTIONS.length) {
+    loadQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizSection').style.display = 'none';
+  const rs = document.getElementById('resultScreen');
+  rs.classList.add('show');
+
+  const ranks = [
+    { min: 10, emoji: '🏆', rank: '電閃マスター！', msg: '全問正解！完璧な電気知識の持ち主。\nあなたはホンモノのパイオニアだ。\n電閃－DENSEN－があなたを待っている。' },
+    { min: 8,  emoji: '⚡', rank: '電気の使い手',   msg: 'すごい！あと少しで完璧。\n解説を読めば満点も見えてくる。\n電工×AI時代の最前線を走る素質あり！' },
+    { min: 6,  emoji: '🔌', rank: '電気に目覚めた人', msg: '基礎はバッチリ。\nあとは応用問題に挑戦あるのみ！\n電閃－DENSEN－で一緒に深めよう。' },
+    { min: 3,  emoji: '💡', rank: '電気の見習い',   msg: '電気の世界、少しずつわかってきた？\n解説を読んで復習しよう。\n伸びしろしかない！ファイト。' },
+    { min: 0,  emoji: '😱', rank: 'ビリビリ直撃！',  msg: '電気、おそるべし…でも大丈夫！\n解説を読めば今日から電気博士の卵。\nここから始めれば必ず伸びる！' },
+  ];
+
+  const r = ranks.find(r => score >= r.min);
+  document.getElementById('resultEmoji').textContent = r.emoji;
+  document.getElementById('resultRank').textContent = r.rank;
+  document.getElementById('resultScore').innerHTML = `${score}<span> / 10問</span>`;
+  document.getElementById('resultMsg').textContent = r.msg;
+
+  const text = encodeURIComponent(
+    `⚡ビリビリクイズに挑戦！\n` +
+    `結果：${score}/10問 正解「${r.rank}」\n\n` +
+    `電気の基礎知識クイズ、あなたは何問解ける？\n初心者でも楽しめる10問！\n\n` +
+    `#電閃DENSEN #ビリビリクイズ #電気工事士 #電気の基礎`
+  );
+  document.getElementById('shareBtn').href = `https://twitter.com/intent/tweet?text=${text}`;
+
+  // Review
+  const rev = document.getElementById('reviewSection');
+  rev.classList.add('show');
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  userAnswers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = `review-item ${a.ok ? 'got-it' : 'got-wrong'}`;
+    div.innerHTML = `
+      <div class="r-q"><span class="r-status">${a.ok ? '✅' : '❌'}</span>Q${i + 1}. ${a.q}</div>
+      <div class="r-a">
+        <span class="lbl">あなたの答え：</span>${a.chosen}<br>
+        ${!a.ok ? `<span class="lbl">正解：</span><span class="correct-a">${a.correct}</span>` : ''}
+      </div>`;
+    list.appendChild(div);
+  });
+}
+
+function restartQuiz() {
+  current = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+  document.getElementById('resultScreen').classList.remove('show');
+  document.getElementById('reviewSection').classList.remove('show');
+  document.getElementById('quizSection').style.display = 'block';
+  loadQuestion();
+}
+</script>
+</body>
+</html>
