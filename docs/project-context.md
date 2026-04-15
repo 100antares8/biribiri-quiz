@@ -1,6 +1,6 @@
 # 電閃－DENSEN－｜あるc（Cursor）引き継ぎ資料
-
 **作成日**: 2026年4月15日  
+**最終更新**: 2026年4月15日（本日大幅更新）  
 **用途**: このファイルをCursorに読み込ませて作業を引き継ぐ  
 **対象AI**: あるc（Cursor / Claude）
 
@@ -21,21 +21,23 @@
 |---|---|
 | プロジェクト名 | 電閃－DENSEN－（読み：でんせん） |
 | 表記ルール | 必ず「－」を入れる。電閃－DENSEN－ |
+| 英語キャッチワード | **Electrify**（一語で電気×感動を表現） |
 | ジャンル | 電気工事士 × AI 特化プラットフォーム |
 | 運営者名義 | **さそり**（発信者） |
 | 内部オーナー | **アンタレス**（承認・決定者） |
-| Xアカウント | @densen_ai（AI×電工⚡️さそり🦂） |
+| Xアカウント | @densen_ai（🦂さそり⚡️電工×AI） |
 | キャッチコピー | 「現場とAIを、結ぶ・活かす・稼ぐ。」 |
+| サイト副題 | 「電気工事スペシャリスト集団の情報サイト」 |
+| Electrifyコピー | `― Electrify Japan's Electricians. ―` |
 
 ---
 
 ## 2. さそりのポジション（重要・発信スタンスの根拠）
 
 - 第二種電気工事士免状保有
-- 父親（第一種電工・個人事業主。ビルレベルの工事・大手建設企業と対等に仕事するレベル）のもとで**約2年間**実務経験
-- 普通の2種範囲の工事ができるレベル
+- 父親（第一種電工・個人事業主）のもとで**約2年間**実務経験
 - 現役最前線プロではないが、**現場の感覚・イメージを持つ**
-- 発信スタンス：**「元電工・今はAIを触ってる情報屋」「裏方・同志的存在」**
+- 発信スタンス：**「元電工、今はAIを操る情報屋」「裏方・同志的存在」**
 - 権威・専門家としては振る舞わない
 
 ---
@@ -51,14 +53,22 @@
 6. **AI生成コンテンツはアンタレス最終確認後に公開**
 7. 間違えた場合は素直に謝り訂正する
 
-### やること・やらないこと
-| やること | やらないこと |
+### 表記ルール：AI×電工 vs 電工×AI（確定）
+| 場所 | 表記 | 理由 |
+|---|---|---|
+| X（@densen_ai） | **AI×電工** | さそり自身はAI側の人間。AIが主軸 |
+| サイト・コンテンツ全般 | **電工×AI** | 届けたい相手は現場の人。電工が主軸 |
+| キャッチコピー | **現場×AI** | 読者目線。現場（電工側）から見た世界観 |
+
+### Electrify使用ガイドライン
+| 場所 | フレーズ |
 |---|---|
-| 現場体験ベースの発信 | 法令の断言・解説 |
-| AI活用ノウハウの共有 | 曖昧な技術情報の断定 |
-| 情報の出典を明記 | 確認できない情報を流す |
-| 「一緒に調べよう」スタンス | 専門家・権威として振る舞う |
-| 知識DBの提供（出典付き） | 無出典の法令・技術情報 |
+| X固定ポスト末尾 | `― Electrify your future.` |
+| サイトヘッダー下 | `― Electrify Japan's Electricians. ―` |
+| ブログ記事の締め | `Stay electrified.` |
+| グッズ・Tシャツ | `ELECTRIFY` 単体でロゴ化 |
+
+**制限**: 電閃－DENSEN－ブランド専用。note側では使わない。
 
 ---
 
@@ -70,42 +80,47 @@
 | 拡張 | AI×電工に感度の高い人・現場主義の人 |
 | ペルソナ | 28〜42歳男性・中小電工勤務 or 独立1〜3年目 |
 | 世界観 | 「パイオニアだけが集まる場所」選民感・同志感 |
+| 選民感コピー | 「ここに辿り着いた君は、電工×AIのパイオニアだ。」 |
 | 媒体 | X（認知）→ アプリ（資産化）→ サイト（長期資産） |
 
 ---
 
-## 5. 現在の進捗状況
+## 5. 現在の進捗状況（2026年4月15日時点）
 
 ### 完了済み ✅
 | タスク | 詳細 |
 |---|---|
-| ビリビリ⚡クイズ v0.1 beta | 電気クイズ10問・初心者向け・法令精査済み |
-| GitHub リポジトリ | `100antares8/biribiri-quiz` |
-| Vercel デプロイ | https://biribiri-quiz.vercel.app/biribiri-quiz/ |
+| ビリビリ⚡クイズ v0.1 beta | 電気クイズ10問・法令精査済み・OGP設定済み |
+| GitHub `biribiri-quiz` | `100antares8/biribiri-quiz` |
+| Vercel `biribiri-quiz` | https://biribiri-quiz.vercel.app/ |
 | Xアカウント開設 | @densen_ai・プロフ・アイコン設定済み |
 | Xポスト投稿 | クイズ告知ポスト済み |
-| インフラドキュメント | `docs/infrastructure.md` に記録済み |
+| **電閃メインサイト構築** | https://densen-site.vercel.app ✅ **本日公開** |
+| GitHub `densen-site` | `100antares8/densen-site` ✅ **本日作成** |
+| Vercel `densen-site` | https://densen-site.vercel.app ✅ **本日デプロイ** |
+| インフラドキュメント更新 | `docs/infrastructure.md` 本日更新 |
 
 ### 進行中・次のタスク 🔲
 | 優先 | タスク | 詳細 |
 |---|---|---|
-| **最高** | **電閃メインサイト構築** | トップ・about・知識DB・リンク集 |
-| 高 | GitHub新規リポジトリ `densen-project` 作成 | メインサイト用・今回のフォルダとは別 |
-| 高 | Vercel新規デプロイ | `densen-project.vercel.app` |
-| 中 | X固定ポスト設定 | ブランドコア文言 |
-| 中 | 法令遵守チェックフロー設計 | コンテンツ公開前の確認フロー |
-| 低 | Notion独立プロフィールページ | プロジェクト記録用 |
+| **高** | **知識DBコンテンツ執筆** | COMING SOON記事6件を順次公開。出典確認必須 |
+| **高** | **X固定ポスト設定** | `― Electrify your future.` を末尾に追加 |
+| 中 | densen-site OGP設定 | og:imageをメインサイトにも設定 |
+| 中 | 法令遵守チェックフロー設計 | コンテンツ公開前の確認フロー（アルtと設計） |
+| 中 | 未確認市場データの一次ソース確認 | 完成工事高・就業者数・離職率・2045年不足予測 |
+| 低 | Notion独立プロフィールページ構築 | アルk担当 |
+| 低 | ブランドガイドライン正式版作成 | カラー正確値・フォント規定 |
 
 ---
 
-## 6. インフラ構成（確定）
+## 6. インフラ構成（確定・2026年4月15日）
 
-| レイヤ | サービス | 内容 | 状態 |
+| レイヤ | サービス | 名前 | 状態 |
 |---|---|---|---|
-| ソース管理 | GitHub | `100antares8/biribiri-quiz`（クイズ） | ✅ |
-| ソース管理 | GitHub | `100antares8/densen-project`（メインサイト・予定） | 🔲 |
-| ホスティング | Vercel | biribiri-quiz → クイズ | ✅ |
-| ホスティング | Vercel | densen-project → メインサイト（予定） | 🔲 |
+| ソース管理 | GitHub | `100antares8/biribiri-quiz` | ✅ |
+| ソース管理 | GitHub | `100antares8/densen-site` | ✅ |
+| ホスティング | Vercel | `biribiri-quiz` → https://biribiri-quiz.vercel.app/ | ✅ |
+| ホスティング | Vercel | `densen-site` → https://densen-site.vercel.app | ✅ |
 | DB・認証 | Supabase | DENSEN専用・新規（必要時に作成） | 🔲 |
 | SNS | X | @densen_ai | ✅ |
 
@@ -115,32 +130,58 @@
 
 ---
 
-## 7. メインサイト設計（構築待ち）
+## 7. ローカルフォルダ構成（確定）
 
-### サイト構成
 ```
-densen-project.vercel.app/
-├── /                 ← トップ（ブランド・世界観・入口）
-├── /about            ← さそりとは・このサイトについて・免責事項
-├── /knowledge        ← 知識DB一覧（出典付き・体験ベース）
-│   └── /knowledge/[id]  ← 個別記事
-├── /quiz             ← ビリビリクイズへのリンク
-└── /links            ← X・各種リンク集
+C:\Users\User\OneDrive\デスクトップ\densen-project\   ← 電閃プロジェクト大本
+├── biribiri-quiz-app\     ← ビリビリ⚡クイズ（git→biribiri-quiz）
+│   ├── index.html
+│   └── ogp.png            ← SNSサムネイル画像
+├── densen-site\           ← 電閃メインサイト（git→densen-site）
+│   ├── index.html         ← トップ
+│   ├── about.html         ← さそり・免責事項
+│   ├── links.html         ← リンク集
+│   ├── knowledge/
+│   │   └── index.html     ← 知識DB一覧
+│   └── css/
+│       └── style.css      ← 共通スタイル
+├── docs/
+│   ├── project-context.md ← この引き継ぎ資料（本ファイル）
+│   ├── infrastructure.md  ← インフラ構成
+│   └── progress_2026-04-15.md ← 本日の作業まとめ
+└── .gitignore             ← densen-site/を除外設定済み
 ```
-
-### 技術スタック（決定）
-- **静的HTML/CSS/JS**（Node.js不要・Vercelで即公開）
-- デザイン：ビリビリクイズと同一テーマ（dark・electric）
-- 将来：必要に応じてNext.js移行（PH1以降）
-
-### コンテンツの書き方ルール
-- 断言しない・体験ベース・出典明記
-- 知識DBには必ず「この情報について」免責バナーを表示
-- 「現場ではこうだった」「AIで調べたらこうだった」スタンス
 
 ---
 
-## 8. フェーズ計画
+## 8. メインサイト設計（完成）
+
+### サイト構成
+```
+densen-site.vercel.app/
+├── /              ← トップ（ヒーロー・特徴・市場データ・クイズCTA・X CTA）
+├── /about         ← さそりプロフ・サイト方針・免責事項
+├── /knowledge     ← 知識DB一覧（カテゴリフィルター・COMING SOON）
+└── /links         ← X・クイズ・法令リソースリンク集
+```
+
+### 技術スタック（確定）
+- **静的HTML/CSS/JS**（Node.js不要・Vercelで即公開）
+- デザイン：ビリビリクイズと同一テーマ（dark・electric）
+- カラー：`#0a0e1a`（bg）・`#f5c800`（金）・`#00c8ff`（電光ブルー）
+- 将来：必要に応じてNext.js移行（PH1以降）
+
+### 知識DBに掲載済み（COMING SOON）のテーマ
+1. 電気工事士法とは？資格が必要な工事・不要な工事の違い
+2. 漏電遮断器（ELCB）の仕組みと役割
+3. コンセントの穴の長さが違う理由
+4. AIを電工の勉強・仕事にどう使う？
+5. 電線の色分けルール
+6. タコ足配線はなぜ危険？
+
+---
+
+## 9. フェーズ計画
 
 | PH | 内容 | 収益 |
 |---|---|---|
@@ -151,41 +192,35 @@ densen-project.vercel.app/
 
 ---
 
-## 9. ローカルフォルダ構成（このリポジトリ）
+## 10. AIチーム体制
 
-```
-C:\Users\User\OneDrive\デスクトップ\densen-project\
-├── biribiri-quiz/
-│   └── index.html         ← クイズアプリ本体
-├── docs/
-│   ├── infrastructure.md  ← インフラ構成・Supabase方針
-│   └── project-context.md ← この引き継ぎ資料（本ファイル）
-├── assets/                ← 画像・ロゴ等
-├── index.html             ← ルートリダイレクト
-├── README.md
-└── .gitignore
-```
-
-**GitHub remote**: `https://github.com/100antares8/biribiri-quiz`  
-**Vercel URL**: `https://biribiri-quiz.vercel.app/biribiri-quiz/`
+| 役割 | 担当 | 内容 |
+|---|---|---|
+| 司令塔 | アンタレス | Owner兼編集長。最終承認者 |
+| 戦略編集 | アルt | 戦略・コピー・コンテンツ整形 |
+| リサーチ | リラ | 業界ニュース・法令リサーチ |
+| X観測 | イーロン（Grok） | X動向観測 |
+| **サイト構築・開発** | **あるc（Cursor）** | サイト構築・アプリ開発・本資料管理 |
+| 記録 | アルk | Notion記録・アーカイブ |
+| 自動化（待機） | アルk | 自動化フェーズで投入 |
 
 ---
 
-## 10. 次にあるcへ依頼すること
+## 11. 次にあるcへ依頼すること
 
-**メインサイト（densen-project）の構築**
+優先順で記載：
 
-新しいフォルダ `C:\Users\User\OneDrive\デスクトップ\densen-site\` に以下を作成：
-1. `index.html` — トップページ
-2. `about.html` — さそり・免責事項
-3. `knowledge/index.html` — 知識DB一覧
-4. `links.html` — リンク集
-5. `css/style.css` — 共通スタイル（クイズと同テーマ）
+1. **知識DB 第1記事の執筆**  
+   テーマ：「電気工事士法とは？資格が必要な工事・不要な工事の違い」  
+   → 出典: e-Gov電気工事士法 / 経産省 / 電気技術者試験センター  
+   → 免責バナー必須・断言しないスタンスで
 
-その後：
-- GitHub新規リポジトリ `densen-project` を作成
-- Vercelデプロイ → `densen-project.vercel.app`
+2. **densen-site OGP設定**  
+   メインサイトにもog:image・twitter:cardを設定
+
+3. **ブランドガイドライン正式版**  
+   カラー正確値（HEX/RGB）・フォント規定・絵文字ルール・Electrify使用規定
 
 ---
 
-*電閃－DENSEN－｜あるc引き継ぎ資料 / 更新: 2026-04-15*
+*電閃－DENSEN－｜あるc引き継ぎ資料 / 最終更新: 2026-04-15*
